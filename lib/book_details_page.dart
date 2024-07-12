@@ -108,10 +108,10 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
 
   Widget _buildDistrictList(List<dynamic> districts) {
     return Column(
-      children: districts.map<Widget>((district) {
+      children: districts.where((district) => !district["notes"].toString().startsWith("已借出馆藏")).map<Widget>((district) {
         return ExpansionTile(
           title: Text(district['notes'], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          children: (district['InsideServiceAddr'] ?? [] as List<dynamic>).where((lib) => !lib.toString().startsWith("已借出馆藏")).map<Widget>((library) {
+          children: (district['InsideServiceAddr'] ?? [] as List<dynamic>).map<Widget>((library) {
             return ExpansionTile(
               title: Text(library['note'], style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               subtitle: Text(library['library'] ?? "无地址", style: TextStyle(fontSize: 14)),
